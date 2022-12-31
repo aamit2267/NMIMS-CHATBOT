@@ -52,9 +52,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    messageList.insert(0, _userMessage(_textController.text));
+                    if (_textController.text != "")
+                      messageList.insert(0, _userMessage(_textController.text));
                   });
-                  _locator(_textController.text);
+                  if (_textController.text != "")
+                    _locator(_textController.text);
                   _textController.clear();
                 },
                 splashColor: Colors.grey,
@@ -100,9 +102,10 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://st4.depositphotos.com/4202565/30232/v/1600/depositphotos_302325204-stock-illustration-robot-icon-chat-robot-icon.jpg"),
+          CircleAvatar(
+            backgroundColor: Colors.white,
+            // place assets/images/robo.png
+            child: Image.asset("assets/images/robo.png"),
           ),
           const SizedBox(
             width: 10,
@@ -135,9 +138,9 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://st4.depositphotos.com/4202565/30232/v/1600/depositphotos_302325204-stock-illustration-robot-icon-chat-robot-icon.jpg"),
+          CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Image.asset("assets/images/robo.png"),
           ),
           const SizedBox(
             width: 10,
@@ -287,9 +290,9 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://st4.depositphotos.com/4202565/30232/v/1600/depositphotos_302325204-stock-illustration-robot-icon-chat-robot-icon.jpg"),
+          CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Image.asset("assets/images/robo.png"),
           ),
           const SizedBox(
             width: 10,
@@ -369,9 +372,9 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://st4.depositphotos.com/4202565/30232/v/1600/depositphotos_302325204-stock-illustration-robot-icon-chat-robot-icon.jpg"),
+          CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Image.asset("assets/images/robo.png"),
           ),
           const SizedBox(
             width: 10,
@@ -443,14 +446,17 @@ class _HomePageState extends State<HomePage> {
       var response = await request.close();
       if (response.statusCode == HttpStatus.ok) {
         var par = await response.transform(utf8.decoder).join();
-
-        var pa = json.decode(par);
-        result = "Name: " +
-            pa[0]['name'] +
-            "\nWing: " +
-            pa[0]['wing'] +
-            "\nFloor: " +
-            pa[0]['floor'];
+        if (par == "[]") {
+          result = "Cannot find location.";
+        } else {
+          var pa = json.decode(par);
+          result = "Name: " +
+              pa[0]['name'] +
+              "\nWing: " +
+              pa[0]['wing'] +
+              "\nFloor: " +
+              pa[0]['floor'];
+        }
       } else {
         result =
             'Error getting a response:\nHttp status ${response.statusCode}';

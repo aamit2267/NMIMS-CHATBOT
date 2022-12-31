@@ -64,10 +64,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image(
-                    image: NetworkImage(
-                        "https://static.vecteezy.com/system/resources/previews/005/034/731/original/menu-card-icon-in-modern-flat-style-vector.jpg"),
-                  ),
+                  Image.asset("assets/images/menu.jpeg"),
                   Padding(
                     padding: EdgeInsets.only(bottom: 20),
                     child: Text(
@@ -97,10 +94,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image(
-                    image: NetworkImage(
-                        "https://cdn-icons-png.flaticon.com/512/1865/1865269.png"),
-                  ),
+                  Image.asset("assets/images/map.png"),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20),
                     child: Text(
