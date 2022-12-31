@@ -2,9 +2,9 @@
     package="com.example.gccp_project">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="gccp_project"
+        android:label="NmChat"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/app_logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:gccp_project/Ask/Ask.dart';
 
@@ -468,6 +467,39 @@ class _HomePageState extends State<HomePage> {
       messageList.insert(0, _botMessage(result));
     });
   }
+
+  // _canteen() async {
+  //   var url = "https://us-central1-nmims-chatbot.cloudfunctions.net/canteen";
+  //   var httpClient = new HttpClient();
+  //   String result = "";
+  //   try {
+  //     var request = await httpClient.postUrl(Uri.parse(url));
+  //     request.headers.set('content-type', 'application/json');
+  //     request.add(utf8.encode(json.encode({
+  //       "text": "canteen",
+  //     })));
+  //     var response = await request.close();
+  //     if (response.statusCode == HttpStatus.ok) {
+  //       var par = await response.transform(utf8.decoder).join();
+  //       if (par == "[]") {
+  //         result = "Cannot find menu.";
+  //       } else {
+  //         var pa = json.decode(par);
+  //         pa.forEach((item) {
+  //   result = result + item['item'].toString() + " " + item['price'].toString() + "\n";
+  // });
+  //       }
+  //     } else {
+  //       result =
+  //           'Error getting a response:\nHttp status ${response.statusCode}';
+  //     }
+  //   } catch (exception) {
+  //     result = 'Failed invoking the function. Exception: $exception';
+  //   }
+  //   setState(() {
+  //     messageList.insert(0, _botMessage(result));
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
