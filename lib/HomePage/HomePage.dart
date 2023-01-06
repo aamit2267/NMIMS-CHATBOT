@@ -533,7 +533,6 @@ class _HomePageState extends State<HomePage> {
           )),
           if (messageList.isEmpty) _botMessage("Welcome to NMIMS Chatbot."),
           if (messageList.isEmpty) _startUp(),
-          messagecount(),
           if (messageList.isNotEmpty) _mainmenu(),
           _endChatButton(),
           if (isClassroomLabs) _queryInputWidget(context),
