@@ -5,7 +5,7 @@
 
 <p>
 <img src="./assets/glimpse/onboard1.png" width="33%">
-<img src="./assets/glimpse/onboard2.png" width="33%">
+<img src="./assets/glimpse/onboard2.png" width="30%">
 <img src="./assets/glimpse/onboard3.png" width="33%">
 </p>
 
