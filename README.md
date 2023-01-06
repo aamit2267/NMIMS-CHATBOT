@@ -40,6 +40,14 @@ This file consist of various methods, widgets and much more that are used to bui
 
 ---
 
+### For Testing
+Classroom and lab names:
+- lr3
+- lr12
+- prlab
+
+---
+
 ### Special Thanks
 - [GDSC India](https://gdsc.community.dev/)
 - [GDSC MPSTME Shirpur](https://gdsc.community.dev/mukesh-patel-school-of-technology-management-and-engineering-shirpur/)
