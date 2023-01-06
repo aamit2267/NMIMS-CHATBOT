@@ -1,5 +1,4 @@
 ![NMChat](./assets/images/robo.png)
-
 ## NMChat
 
 *This application is developed to solve some common problems that were faced by the students of NMIMS University, Shirpur.*
