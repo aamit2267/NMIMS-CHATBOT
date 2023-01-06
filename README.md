@@ -1,7 +1,5 @@
 <center>
-
-![NMChat](./assets/images/robo.png)
-
+<img src="./assets/images/robo.png">
 </center>
 
 ## NMChat
