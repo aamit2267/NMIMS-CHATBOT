@@ -1,6 +1,4 @@
-<center>
 <img src="./assets/images/robo.png">
-</center>
 
 ## NMChat
 
