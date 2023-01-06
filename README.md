@@ -41,7 +41,7 @@ This file consist of various methods, widgets and much more that are used to bui
 ---
 
 ### Special Thanks
-- [GDSC India]()
-- [GDSC MPSTME Shirpur]()
+- [GDSC India](https://gdsc.community.dev/)
+- [GDSC MPSTME Shirpur](https://gdsc.community.dev/mukesh-patel-school-of-technology-management-and-engineering-shirpur/)
 
 Thanks!! for giving me this opportunity to solve a common problem of my college. And to represent my college on a global level as Google Cloud Career Practitioners Campaign Facilitator.
