@@ -3,9 +3,11 @@
 
 *This application is developed to solve some common problems that were faced by the students of NMIMS University, Shirpur.*
 
+<p>
 <img src="./assets/glimpse/onboard1.png" width="33%">
 <img src="./assets/glimpse/onboard2.png" width="33%">
 <img src="./assets/glimpse/onboard3.png" width="33%">
+</p>
 
 ---
 
