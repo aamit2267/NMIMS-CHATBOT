@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gccp_project/Ask/Ask.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -116,13 +117,27 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  message,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                  ),
-                ),
+                child: message.startsWith("http")
+                    ? TextButton(
+                        onPressed: () {
+                          // route to message link
+                          launch(message);
+                        },
+                        child: Text(
+                          message,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
+                        ),
+                      )
+                    : Text(
+                        message,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
               ),
             ),
           ),
@@ -342,10 +357,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       onPressed: () {
-                        setState(() {
-                          messageList.insert(0,
-                              _botMessage("You can ask me about the weather"));
-                        });
+                        _canteen();
                       },
                       child: Text(
                         'Canteen',
@@ -468,75 +480,94 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // _canteen() async {
-  //   var url = "https://us-central1-nmims-chatbot.cloudfunctions.net/canteen";
-  //   var httpClient = new HttpClient();
-  //   String result = "";
-  //   try {
-  //     var request = await httpClient.postUrl(Uri.parse(url));
-  //     request.headers.set('content-type', 'application/json');
-  //     request.add(utf8.encode(json.encode({
-  //       "text": "canteen",
-  //     })));
-  //     var response = await request.close();
-  //     if (response.statusCode == HttpStatus.ok) {
-  //       var par = await response.transform(utf8.decoder).join();
-  //       if (par == "[]") {
-  //         result = "Cannot find menu.";
-  //       } else {
-  //         var pa = json.decode(par);
-  //         pa.forEach((item) {
-  //   result = result + item['item'].toString() + " " + item['price'].toString() + "\n";
-  // });
-  //       }
-  //     } else {
-  //       result =
-  //           'Error getting a response:\nHttp status ${response.statusCode}';
-  //     }
-  //   } catch (exception) {
-  //     result = 'Failed invoking the function. Exception: $exception';
-  //   }
-  //   setState(() {
-  //     messageList.insert(0, _botMessage(result));
-  //   });
-  // }
+  _canteen() async {
+    var url = "https://us-central1-nmims-chatbot.cloudfunctions.net/canteen";
+    var httpClient = new HttpClient();
+    String result = "";
+    try {
+      var request = await httpClient.postUrl(Uri.parse(url));
+      request.headers.set('content-type', 'application/json');
+      request.add(utf8.encode(json.encode({
+        "text": "canteen",
+      })));
+      var response = await request.close();
+      if (response.statusCode == HttpStatus.ok) {
+        var par = await response.transform(utf8.decoder).join();
+        if (par == "[]") {
+          result = "Cannot find menu.";
+        } else {
+          var pa = json.decode(par);
+          print(pa);
+          pa.forEach((item) {
+            result = result +
+                item['items'].toString() +
+                " " +
+                item['price'].toString() +
+                "\n";
+          });
+          print(result);
+        }
+      } else {
+        result =
+            'Error getting a response:\nHttp status ${response.statusCode}';
+      }
+    } catch (exception) {
+      result = 'Failed invoking the function. Exception: $exception';
+    }
+    setState(() {
+      messageList.insert(0, _botMessage(result));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('NMIMS ChatBot'),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            setState(() {
-              messageList.clear();
-            });
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => Ask(),
-              ),
-            );
-          },
+    return WillPopScope(
+      onWillPop: () {
+        setState(() {
+          messageList.clear();
+        });
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => Ask(),
+          ),
+        );
+        return Future.value(false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('NMIMS ChatBot'),
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              setState(() {
+                messageList.clear();
+              });
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => Ask(),
+                ),
+              );
+            },
+          ),
         ),
-      ),
-      body: Column(
-        children: <Widget>[
-          Flexible(
-              child: ListView.builder(
-            padding: const EdgeInsets.all(8.0),
-            reverse: true,
-            itemBuilder: (_, int index) => messageList[index],
-            itemCount: messageList.length,
-          )),
-          if (messageList.isEmpty) _botMessage("Welcome to NMIMS Chatbot."),
-          if (messageList.isEmpty) _startUp(),
-          if (messageList.isNotEmpty) _mainmenu(),
-          _endChatButton(),
-          if (isClassroomLabs) _queryInputWidget(context),
-        ],
+        body: Column(
+          children: <Widget>[
+            Flexible(
+                child: ListView.builder(
+              padding: const EdgeInsets.all(8.0),
+              reverse: true,
+              itemBuilder: (_, int index) => messageList[index],
+              itemCount: messageList.length,
+            )),
+            if (messageList.isEmpty) _botMessage("Welcome to NMIMS Chatbot."),
+            if (messageList.isEmpty) _startUp(),
+            if (messageList.isNotEmpty) _mainmenu(),
+            _endChatButton(),
+            if (isClassroomLabs) _queryInputWidget(context),
+          ],
+        ),
       ),
     );
   }
