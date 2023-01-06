@@ -1,4 +1,4 @@
-<img src="./assets/images/robo.png">
+![NMChat](./assets/images/robo.png)
 
 ## NMChat
 
