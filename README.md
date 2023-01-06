@@ -5,9 +5,9 @@
 *This application is developed to solve some common problems that were faced by the students of NMIMS University, Shirpur.*
 
 <p>
-<img src="./assets/glimpse/onboard1.png" width="33%" height="450">
-<img src="./assets/glimpse/onboard2.png" width="30%" height="450">
-<img src="./assets/glimpse/onboard3.png" width="33%" height="450">
+<img src="./assets/glimpse/1.png" width="33%" height="450">
+<img src="./assets/glimpse/2.png" width="30%" height="450">
+<img src="./assets/glimpse/3.png" width="33%" height="450">
 </p>
 
 ---
